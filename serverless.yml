@@ -1,0 +1,39 @@
+service: serverless-indexer
+app: serverless-indexer-app
+org: scissorsneedfoodtoo
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: us-east-1
+  environment:
+    ALGOLIA_ID: ${file(./.env.yml):ALGOLIA_ID}
+    ALGOLIA_ADMIN_KEY: ${file(./.env.yml):ALGOLIA_ADMIN_KEY}
+
+functions:
+  addIndex:
+    handler: handler.addIndex
+    events:
+      - http:
+          path: add
+          method: post
+
+  deleteIndex:
+    handler: handler.deleteIndex
+    events:
+      - http:
+          path: delete
+          method: post
+
+  # Might get expensive between
+  # AWS and Algolia
+  # updateIndex:
+  #   handler: handler.updateIndex
+  #   events:
+  #     - http:
+  #         path: update
+  #         method: post
+
+plugins:
+  - serverless-offline
