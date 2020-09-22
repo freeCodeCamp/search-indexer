@@ -4,53 +4,66 @@ const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
 
 const algolia = require('algoliasearch');
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-// const index = algoliaApp.initIndex('news');
-const index = algoliaApp.initIndex('test_serverless');
+const index = algoliaApp.initIndex('news');
 
-function formatArticle(article) {
+const dasherize = (name) => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s/g, '-')
+    .replace(/[^a-z\d\-.]/g, '');
+}
+
+function formatPost(post) {
+  const currProfileImg = post.primary_author.profile_image;
+  const profileImageUrl = (currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')) ? `https:${currProfileImg}` : currProfileImg;
+
   return {
-    title: article.title,
+    objectID: post.id,
+    title: post.title,
     author: {
-      name: article.primary_author.name,
-      url: article.primary_author.url,
-      profileImage: article.primary_author.profile_image
+      name: post.primary_author.name,
+      url: post.primary_author.url,
+      profileImage: profileImageUrl
     },
-    tags: article.tags.map(obj => {
+    tags: post.tags.map(obj => {
       return {
         name: obj.name,
-        url: obj.url
+        url: obj.url.includes('404') ? `https://www.freecodecamp.org/news/tag/${dasherize(obj.name)}/` : obj.url // occasionally gets a 404 -- maybe if there's only one article with this tag?
       }
     }),
-    url: article.url,
-    featureImage: article.feature_image,
-    ghostId: article.id,
-    publishedAt: article.published_at
+    url: post.url,
+    featureImage: post.feature_image,
+    publishedAt: post.published_at,
+    publishedAtTimestamp: new Date(post.published_at).getTime() / 1000 | 0
   }
 }
 
-function getAlgoliaId(ghostId) {
-  return index.search({ query: ghostId })
-    .then(res => res.hits[0].objectID)
-    .catch(err => console.log(err));
-}
-
 async function addIndex(req) {
+  console.log(req);
   const body = JSON.parse(req.body);
   const currState = body.post.current;
-  const newArticle = formatArticle(currState);
+  const newPost= formatPost(currState);
 
-  const addObj = await index.addObject(newArticle)
-    .then(res => res)
-    .catch(err => console.log(err));
+  try {
+    const addObj = await index.saveObject(newPost);
 
-  console.log(newArticle);
-  
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      addedArticle: newArticle,
-      algoliaRes: addObj
-    })
+    console.log(addObj);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        addedArticle: newPost,
+        algoliaRes: addObj
+      })
+    }
+  } catch(err) {
+    console.error(err);
+
+    return {
+      statusCode: 500,
+      body: `Error: ${err}`
+    }
   }
 }
 
@@ -59,23 +72,29 @@ async function deleteIndex(req) {
   // obj in `req.body.post.previous`. Unpublishing a published 
   // article returns the article obj in `req.body.post.current`
   const body = JSON.parse(req.body);
-  const prevState = body.post.previous;
-  const currState = body.post.current;
-  const ghostId = prevState.id ? prevState.id : currState.id;
-  const algoliaId = await getAlgoliaId(ghostId);
+  const prevPost = body.post.previous;
+  const currPost = body.post.current;
+  const ghostId = prevPost.id ? prevPost.id : currPost.id;
 
-  const deleteObj = await index.deleteObject(algoliaId)
-    .then(res => res)
-    .catch(err => console.log(err));
+  try {
+    const deleteObj = await index.deleteObject(ghostId);
 
-  console.log(deleteObj);
-  
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      deletedArticle: prevState ? prevState : currState,
-      algoliaRes: deleteObj
-    })
+    console.log(deleteObj);
+    
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        deletedArticle: prevPost ? prevPost : currPost,
+        algoliaRes: deleteObj
+      })
+    }
+  } catch(err) {
+    console.error(err);
+
+    return {
+      statusCode: 500,
+      body: `Error: ${err}`
+    }
   }
 }
 
@@ -93,7 +112,7 @@ async function updateIndex(req) {
 
   // Check for meaningful changes here before updating Algolia index
   if (diff.length > 0) {
-    let updatedArticle = formatArticle(currState);
+    let updatedArticle = formatPost(currState);
     const ghostId = updatedArticle.ghostId;
     const algoliaId = await getAlgoliaId(ghostId);
 
