@@ -9,16 +9,17 @@ const { formatPost } = require('./helper-functions');
 
 async function addIndex(req) {
   const body = JSON.parse(req.body);
-  const currState = body.post.current;
-  const newPost= formatPost(currState);
+  const postOrPage = body.post ? body.post : body.page;
+  const currState = postOrPage.current;
+  const newArticle = formatPost(currState);
 
   try {
-    const addObj = await index.saveObject(newPost);
+    const addObj = await index.saveObject(newArticle);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        addedArticleId: newPost.id,
+        addedArticleId: newArticle.id,
         algoliaRes: addObj
       })
     }
@@ -34,20 +35,21 @@ async function addIndex(req) {
 
 async function deleteIndex(req) {
   // Deleting a published article returns the article
-  // obj in `req.body.post.previous`. Unpublishing a published 
-  // article returns the article obj in `req.body.post.current`
+  // obj in `req.body.post/page.previous`. Unpublishing a published 
+  // article returns the article obj in `req.body.post/page.current`
   const body = JSON.parse(req.body);
-  const prevPost = body.post.previous;
-  const currPost = body.post.current;
-  const ghostId = prevPost.id ? prevPost.id : currPost.id;
+  const postOrPage = body.post ? body.post : body.page;
+  const prevState = postOrPage.previous;
+  const currState = postOrPage.current;
+  const targetId = prevState.id ? prevState.id : currState.id;
 
   try {
-    const deleteObj = await index.deleteObject(ghostId);
+    const deleteObj = await index.deleteObject(targetId);
     
     return {
       statusCode: 200,
       body: JSON.stringify({
-        deletedArticleId: ghostId,
+        deletedArticleId: targetId,
         algoliaRes: deleteObj
       })
     }
@@ -63,10 +65,12 @@ async function deleteIndex(req) {
 
 async function updateIndex(req) {
   const body = JSON.parse(req.body);
-  const prevState = body.post.previous;
-  const currState = body.post.current;
-  // Parse the keys of what the Ghost webhook returns
-  // and only trigger an update if specific values change
+  const postOrPage = body.post ? body.post : body.page;
+  const prevState = postOrPage.previous;
+  const currState = postOrPage.current;
+  // The Ghost webhook returns only the updated values in
+  // `req.body.post/page.previous`. Parse the keys from that
+  // and only trigger an update if specific values changed
   const keys = Object.keys(prevState);
   const targets = ['slug', 'title', 'authors', 'tags', 'feature_image', 'published_at'];
   const diff = keys.filter(val => targets.includes(val));
