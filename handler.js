@@ -1,46 +1,13 @@
 'use strict';
 
 const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
-
 const algolia = require('algoliasearch');
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 const index = algoliaApp.initIndex('news');
 
-const dasherize = (name) => {
-  return name
-    .toLowerCase()
-    .trim()
-    .replace(/\s/g, '-')
-    .replace(/[^a-z\d\-.]/g, '');
-}
-
-function formatPost(post) {
-  const currProfileImg = post.primary_author.profile_image;
-  const profileImageUrl = (currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')) ? `https:${currProfileImg}` : currProfileImg;
-
-  return {
-    objectID: post.id,
-    title: post.title,
-    author: {
-      name: post.primary_author.name,
-      url: post.primary_author.url,
-      profileImage: profileImageUrl
-    },
-    tags: post.tags.map(obj => {
-      return {
-        name: obj.name,
-        url: obj.url.includes('404') ? `https://www.freecodecamp.org/news/tag/${dasherize(obj.name)}/` : obj.url // occasionally gets a 404 -- maybe if there's only one article with this tag?
-      }
-    }),
-    url: post.url,
-    featureImage: post.feature_image,
-    publishedAt: post.published_at,
-    publishedAtTimestamp: new Date(post.published_at).getTime() / 1000 | 0
-  }
-}
+const { formatPost } = require('./helper-functions');
 
 async function addIndex(req) {
-  console.log(req);
   const body = JSON.parse(req.body);
   const currState = body.post.current;
   const newPost= formatPost(currState);
@@ -48,12 +15,10 @@ async function addIndex(req) {
   try {
     const addObj = await index.saveObject(newPost);
 
-    console.log(addObj);
-
     return {
       statusCode: 200,
       body: JSON.stringify({
-        addedArticle: newPost,
+        addedArticleId: newPost.id,
         algoliaRes: addObj
       })
     }
@@ -78,13 +43,11 @@ async function deleteIndex(req) {
 
   try {
     const deleteObj = await index.deleteObject(ghostId);
-
-    console.log(deleteObj);
     
     return {
       statusCode: 200,
       body: JSON.stringify({
-        deletedArticle: prevPost ? prevPost : currPost,
+        deletedArticleId: ghostId,
         algoliaRes: deleteObj
       })
     }
