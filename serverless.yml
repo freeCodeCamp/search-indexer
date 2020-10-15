@@ -26,14 +26,12 @@ functions:
           path: delete
           method: post
 
-  # Might get expensive between
-  # AWS and Algolia
-  # updateIndex:
-  #   handler: handler.updateIndex
-  #   events:
-  #     - http:
-  #         path: update
-  #         method: post
+  updateIndex:
+    handler: handler.updateIndex
+    events:
+      - http:
+          path: update
+          method: post
 
 plugins:
   - serverless-offline

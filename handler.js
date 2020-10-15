@@ -71,34 +71,33 @@ async function updateIndex(req) {
   const targets = ['slug', 'title', 'authors', 'tags', 'feature_image', 'published_at'];
   const diff = keys.filter(val => targets.includes(val));
 
-  // console.log(prevState, keys, diff);
-
   // Check for meaningful changes here before updating Algolia index
   if (diff.length > 0) {
-    let updatedArticle = formatPost(currState);
-    const ghostId = updatedArticle.ghostId;
-    const algoliaId = await getAlgoliaId(ghostId);
+    const updatedArticle = formatPost(currState);
 
-    updatedArticle['objectID'] = algoliaId;
+    try {
+      const saveObj = await index.saveObject(updatedArticle);
 
-    const saveObj = await index.saveObject(updatedArticle)
-      .then(res => res)
-      .catch(err => console.log(err));
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          updatedArticleId: updatedArticle.id,
+          algoliaRes: saveObj
+        })
+      }
+    } catch(err) {
+      console.error(err);
 
-    console.log(updatedArticle, saveObj)
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        updatedArticle: updatedArticle,
-        algoliaRes: saveObj
-      })
+      return {
+        statusCode: 500,
+        body: `Error: ${err}`
+      }
     }
   }
 }
 
 module.exports = {
   addIndex,
-  // updateIndex,
+  updateIndex,
   deleteIndex
 }
