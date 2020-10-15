@@ -1,17 +1,12 @@
 'use strict';
 
-const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
-const algolia = require('algoliasearch');
-const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-const index = algoliaApp.initIndex('news');
-
-const { formatPost } = require('./helper-functions');
+const { formatPost, postOrPage, setIndex } = require('./helper-functions');
 
 async function addIndex(req) {
   const body = JSON.parse(req.body);
-  const postOrPage = body.post ? body.post : body.page;
-  const currState = postOrPage.current;
+  const currState = postOrPage(body).current;
   const newArticle = formatPost(currState);
+  const index = setIndex(newArticle.url);
 
   try {
     const addObj = await index.saveObject(newArticle);
@@ -38,10 +33,10 @@ async function deleteIndex(req) {
   // obj in `req.body.post/page.previous`. Unpublishing a published 
   // article returns the article obj in `req.body.post/page.current`
   const body = JSON.parse(req.body);
-  const postOrPage = body.post ? body.post : body.page;
-  const prevState = postOrPage.previous;
-  const currState = postOrPage.current;
+  const prevState = postOrPage(body).previous;
+  const currState = postOrPage(body).current;
   const targetId = prevState.id ? prevState.id : currState.id;
+  const index = setIndex(currState.url);
 
   try {
     const deleteObj = await index.deleteObject(targetId);
@@ -65,9 +60,8 @@ async function deleteIndex(req) {
 
 async function updateIndex(req) {
   const body = JSON.parse(req.body);
-  const postOrPage = body.post ? body.post : body.page;
-  const prevState = postOrPage.previous;
-  const currState = postOrPage.current;
+  const prevState = postOrPage(body).previous;
+  const currState = postOrPage(body).current;
   // The Ghost webhook returns only the updated values in
   // `req.body.post/page.previous`. Parse the keys from that
   // and only trigger an update if specific values changed
@@ -78,6 +72,7 @@ async function updateIndex(req) {
   // Check for meaningful changes here before updating Algolia index
   if (diff.length > 0) {
     const updatedArticle = formatPost(currState);
+    const index = setIndex(updatedArticle.url);
 
     try {
       const saveObj = await index.saveObject(updatedArticle);

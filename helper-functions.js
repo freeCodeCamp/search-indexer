@@ -1,3 +1,9 @@
+const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
+const algolia = require('algoliasearch');
+const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
+
+const postOrPage = obj => obj.post ? obj.post : obj.page;
+
 const dasherize = name => {
   return name
     .toLowerCase()
@@ -31,6 +37,27 @@ const formatPost = post => {
   }
 }
 
+const indexMap = {
+  'http://localhost:2368/': 'news-dev',
+  'https://www.freecodecamp.org/news/': 'news',
+  'https://chinese.freecodecamp.org/news/': 'news-zh',
+}
+
+const setIndex = url => {
+  const paths = Object.keys(indexMap);
+  let indexStr;
+
+  paths.forEach(path => {
+    if (url.startsWith(path)) {
+      indexStr = indexMap[path];
+    };
+  });
+
+  return algoliaApp.initIndex(indexStr);
+}
+
 module.exports = {
-  formatPost
+  formatPost,
+  postOrPage,
+  setIndex
 };
