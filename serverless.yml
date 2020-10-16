@@ -8,8 +8,10 @@ provider:
   stage: dev
   region: us-east-1
   environment:
-    ALGOLIA_ID: ${file(./.env.yml):ALGOLIA_ID}
-    ALGOLIA_ADMIN_KEY: ${file(./.env.yml):ALGOLIA_ADMIN_KEY}
+    # ALGOLIA_ID: ${file(./.env.yml):ALGOLIA_ID}
+    # ALGOLIA_ADMIN_KEY: ${file(./.env.yml):ALGOLIA_ADMIN_KEY}
+    ALGOLIA_ID: ${secrets:ALGOLIA_ID}
+    ALGOLIA_ADMIN_KEY: ${secrets:ALGOLIA_ADMIN_KEY}
 
 functions:
   addIndex:
