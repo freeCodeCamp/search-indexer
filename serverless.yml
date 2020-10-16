@@ -6,12 +6,17 @@ provider:
   name: aws
   runtime: nodejs10.x
   stage: dev
-  region: us-east-1
+  region: us-east-2
   environment:
     # ALGOLIA_ID: ${file(./.env.yml):ALGOLIA_ID}
     # ALGOLIA_ADMIN_KEY: ${file(./.env.yml):ALGOLIA_ADMIN_KEY}
-    ALGOLIA_ID: ${secrets:ALGOLIA_ID}
-    ALGOLIA_ADMIN_KEY: ${secrets:ALGOLIA_ADMIN_KEY}
+    # ALGOLIA_ID: ${secrets:ALGOLIA_ID}
+    # ALGOLIA_ADMIN_KEY: ${secrets:ALGOLIA_ADMIN_KEY}
+    ALGOLIA_ID: ${self:custom.awsSecrets.ALGOLIA_ID}
+    ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY}
+
+custom:
+  awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer~true}
 
 functions:
   addIndex:
