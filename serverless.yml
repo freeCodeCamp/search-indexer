@@ -5,13 +5,17 @@ org: scissorsneedfoodtoo
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: dev
+  stage: ${opt:stage, 'dev'}
   region: us-east-2
   environment:
-    ALGOLIA_ID: ${self:custom.awsSecrets.ALGOLIA_ID}
-    ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY}
+    ALGOLIA_ID: ${self:custom.awsSecrets.ALGOLIA_ID_${self:custom.currStage}}
+    ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY_${self:custom.currStage}}
 
 custom:
+  stageMap:
+    dev: DEV
+    prod: PROD
+  currStage: ${self:custom.stageMap.${self:provider.stage}}
   awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer~true}
 
 functions:

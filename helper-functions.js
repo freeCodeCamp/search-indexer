@@ -29,20 +29,21 @@ const formatPost = post => {
   }
 }
 
-const indexMap = {
+const indexNameMap = {
   'http://localhost:2368/': 'news-dev',
+  'https://www.freecodecamp.dev/news/': 'news-dev',
   'https://www.freecodecamp.org/news/': 'news',
   'https://www.freecodecamp.org/espanol/news/': 'news-es',
   'https://chinese.freecodecamp.org/news/': 'news-zh',
 }
 
 const setIndex = url => {
-  const paths = Object.keys(indexMap);
+  const paths = Object.keys(indexNameMap);
   let indexStr;
 
   paths.forEach(path => {
     if (url.startsWith(path)) {
-      indexStr = indexMap[path];
+      indexStr = indexNameMap[path];
     };
   });
 
