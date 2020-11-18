@@ -27,7 +27,7 @@ const formatPost = post => {
     tags: post.tags.map(obj => {
       return {
         name: obj.name,
-        url: obj.url.includes('404') ? `https://www.freecodecamp.org/news/tag/${dasherize(obj.name)}/` : obj.url // occasionally gets a 404 -- maybe if there's only one article with this tag?
+        url: obj.url,
       }
     }),
     url: post.url,
