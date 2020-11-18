@@ -4,14 +4,6 @@ const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
 const postOrPage = obj => obj.post ? obj.post : obj.page;
 
-const dasherize = name => {
-  return name
-    .toLowerCase()
-    .trim()
-    .replace(/\s/g, '-')
-    .replace(/[^a-z\d\-.]/g, '');
-}
-
 const formatPost = post => {
   const currProfileImg = post.primary_author.profile_image;
   const profileImageUrl = (currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')) ? `https:${currProfileImg}` : currProfileImg;
@@ -40,6 +32,7 @@ const formatPost = post => {
 const indexMap = {
   'http://localhost:2368/': 'news-dev',
   'https://www.freecodecamp.org/news/': 'news',
+  'https://www.freecodecamp.org/espanol/news/': 'news-es',
   'https://chinese.freecodecamp.org/news/': 'news-zh',
 }
 
