@@ -1,0 +1,18 @@
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": [
+      "error",
+      { "code": 80, "ignoreUrls": true, "ignoreTemplateLiterals": true }
+    ],
+    "quotes": [2, "single", "avoid-escape"],
+    "prettier/prettier": "error"
+  }
+}
