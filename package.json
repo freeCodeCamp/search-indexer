@@ -7,12 +7,21 @@
     "algoliasearch": "^4.5.1"
   },
   "devDependencies": {
+    "@freecodecamp/eslint-config": "^2.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2",
+    "prettier-eslint": "^11.0.0",
+    "prettier-eslint-cli": "^5.0.0",
     "serverless-offline": "^6.7.0"
   },
   "scripts": {
     "start": "sls invoke --function addIndex",
-    "start local": "sls invoke local --function addIndex",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start local": "sls offline",
+    "format": "prettier-eslint --eslint-config-path $PWD/.eslintrc.json --write $PWD'**/*.js'",
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",

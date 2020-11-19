@@ -1,5 +1,3 @@
-'use strict';
-
 const { formatPost, setIndex } = require('./helper-functions');
 
 async function addIndex(req) {
@@ -17,20 +15,20 @@ async function addIndex(req) {
         addedArticleId: newArticle.id,
         algoliaRes: addObj
       })
-    }
-  } catch(err) {
+    };
+  } catch (err) {
     console.error(err);
 
     return {
       statusCode: 500,
       body: `Error: ${err}`
-    }
+    };
   }
 }
 
 async function deleteIndex(req) {
   // Deleting a published article returns the article
-  // obj in `req.body.post.previous`. Unpublishing a published 
+  // obj in `req.body.post.previous`. Unpublishing a published
   // article returns the article obj in `req.body.post.current`
   const body = JSON.parse(req.body);
   const prevState = body.post.previous;
@@ -40,21 +38,21 @@ async function deleteIndex(req) {
 
   try {
     const deleteObj = await index.deleteObject(targetId);
-    
+
     return {
       statusCode: 200,
       body: JSON.stringify({
         deletedArticleId: targetId,
         algoliaRes: deleteObj
       })
-    }
-  } catch(err) {
+    };
+  } catch (err) {
     console.error(err);
 
     return {
       statusCode: 500,
       body: `Error: ${err}`
-    }
+    };
   }
 }
 
@@ -66,8 +64,15 @@ async function updateIndex(req) {
   // `req.body.post.previous`. Parse the keys from that
   // and only trigger an update if specific values changed
   const keys = Object.keys(prevState);
-  const targets = ['slug', 'title', 'authors', 'tags', 'feature_image', 'published_at'];
-  const diff = keys.filter(val => targets.includes(val));
+  const targets = [
+    'slug',
+    'title',
+    'authors',
+    'tags',
+    'feature_image',
+    'published_at'
+  ];
+  const diff = keys.filter((val) => targets.includes(val));
 
   // Check for meaningful changes here before updating Algolia index
   if (diff.length > 0) {
@@ -83,14 +88,14 @@ async function updateIndex(req) {
           updatedArticleId: updatedArticle.id,
           algoliaRes: saveObj
         })
-      }
-    } catch(err) {
+      };
+    } catch (err) {
       console.error(err);
 
       return {
         statusCode: 500,
         body: `Error: ${err}`
-      }
+      };
     }
   }
 }
@@ -99,4 +104,4 @@ module.exports = {
   addIndex,
   updateIndex,
   deleteIndex
-}
+};
