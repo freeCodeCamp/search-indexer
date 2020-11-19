@@ -1,10 +1,10 @@
 'use strict';
 
-const { formatPost, postOrPage, setIndex } = require('./helper-functions');
+const { formatPost, setIndex } = require('./helper-functions');
 
 async function addIndex(req) {
   const body = JSON.parse(req.body);
-  const currState = postOrPage(body).current;
+  const currState = body.post.current;
   const newArticle = formatPost(currState);
   const index = setIndex(newArticle.url);
 
@@ -30,11 +30,11 @@ async function addIndex(req) {
 
 async function deleteIndex(req) {
   // Deleting a published article returns the article
-  // obj in `req.body.post/page.previous`. Unpublishing a published 
-  // article returns the article obj in `req.body.post/page.current`
+  // obj in `req.body.post.previous`. Unpublishing a published 
+  // article returns the article obj in `req.body.post.current`
   const body = JSON.parse(req.body);
-  const prevState = postOrPage(body).previous;
-  const currState = postOrPage(body).current;
+  const prevState = body.post.previous;
+  const currState = body.post.current;
   const targetId = prevState.id ? prevState.id : currState.id;
   const index = setIndex(currState.url);
 
@@ -60,10 +60,10 @@ async function deleteIndex(req) {
 
 async function updateIndex(req) {
   const body = JSON.parse(req.body);
-  const prevState = postOrPage(body).previous;
-  const currState = postOrPage(body).current;
+  const prevState = body.post.previous;
+  const currState = body.post.current;
   // The Ghost webhook returns only the updated values in
-  // `req.body.post/page.previous`. Parse the keys from that
+  // `req.body.post.previous`. Parse the keys from that
   // and only trigger an update if specific values changed
   const keys = Object.keys(prevState);
   const targets = ['slug', 'title', 'authors', 'tags', 'feature_image', 'published_at'];

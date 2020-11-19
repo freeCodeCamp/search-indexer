@@ -2,8 +2,6 @@ const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
 const algolia = require('algoliasearch');
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
-const postOrPage = obj => obj.post ? obj.post : obj.page;
-
 const formatPost = post => {
   const currProfileImg = post.primary_author.profile_image;
   const profileImageUrl = (currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')) ? `https:${currProfileImg}` : currProfileImg;
@@ -52,6 +50,5 @@ const setIndex = url => {
 
 module.exports = {
   formatPost,
-  postOrPage,
   setIndex
 };
