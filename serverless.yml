@@ -1,12 +1,12 @@
 service: serverless-indexer
-app: serverless-indexer-app
-org: scissorsneedfoodtoo
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
   region: us-east-2
+  apiGateway:
+    shouldStartNameWithService: true
   environment:
     ALGOLIA_ID: ${self:custom.awsSecrets.ALGOLIA_ID}
     ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY}
