@@ -19,21 +19,21 @@ functions:
     handler: handler.addIndex
     events:
       - http:
-          path: add
+          path: add-index
           method: post
 
   deleteIndex:
     handler: handler.deleteIndex
     events:
       - http:
-          path: delete
+          path: delete-index
           method: post
 
   updateIndex:
     handler: handler.updateIndex
     events:
       - http:
-          path: update
+          path: update-index
           method: post
 
 plugins:

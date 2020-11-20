@@ -34,25 +34,37 @@ async function deleteIndex(req) {
   const prevState = body.post.previous;
   const currState = body.post.current;
   const targetId = prevState.id ? prevState.id : currState.id;
-  const index = setIndex(currState.url);
+  const publishedStatus = prevState.status === 'published' ? true : false;
 
-  try {
-    const deleteObj = await index.deleteObject(targetId);
+  // Only update Algolia index if a published article is
+  // unpublished or deleted
+  if (publishedStatus) {
+    // Deleted articles don't include an article url. But since
+    // every article must include at least one article, set index
+    // based on primary author page url instead
+    const primaryAuthorUrl = prevState.authors
+      ? prevState.authors[0].url
+      : currState.authors[0].url;
+    const index = setIndex(primaryAuthorUrl);
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        deletedArticleId: targetId,
-        algoliaRes: deleteObj
-      })
-    };
-  } catch (err) {
-    console.error(err);
+    try {
+      const deleteObj = await index.deleteObject(targetId);
 
-    return {
-      statusCode: 500,
-      body: `Error: ${err}`
-    };
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          deletedArticleId: targetId,
+          algoliaRes: deleteObj
+        })
+      };
+    } catch (err) {
+      console.error(err);
+
+      return {
+        statusCode: 500,
+        body: `Error: ${err}`
+      };
+    }
   }
 }
 
