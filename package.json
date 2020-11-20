@@ -15,7 +15,7 @@
     "prettier": "^2.1.2",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
-    "serverless-offline": "^6.7.0"
+    "serverless-offline": "^6.8.0"
   },
   "scripts": {
     "start": "sls invoke --function addIndex",
