@@ -2,5 +2,8 @@
 node_modules
 jspm_packages
 
-# Serverless directories
+# serverless directories
 .serverless
+
+# settings
+.env.yml
