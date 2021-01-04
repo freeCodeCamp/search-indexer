@@ -18,8 +18,9 @@
     "serverless-offline": "^6.8.0"
   },
   "scripts": {
-    "start": "sls invoke --function addIndex",
-    "start local": "sls offline",
+    "start": "sls offline",
+    "deploy": "sls deploy --stage prod",
+    "deploy-dev": "sls deploy",
     "format": "prettier-eslint --eslint-config-path $PWD/.eslintrc.json --write $PWD'**/*.js'",
     "lint": "eslint . --ext .js"
   },
