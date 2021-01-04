@@ -3,30 +3,46 @@ const algolia = require('algoliasearch');
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
 const formatPost = (post) => {
-  const currProfileImg = post.primary_author.profile_image;
+  const {
+    id,
+    title,
+    primary_author,
+    tags,
+    url,
+    feature_image,
+    published_at
+  } = post;
+  const currProfileImg = primary_author.profile_image;
   const profileImageUrl =
     currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')
       ? `https:${currProfileImg}`
       : currProfileImg;
+  const algoliaFilterRegex = [/java\b/i];
 
   return {
-    objectID: post.id,
-    title: post.title,
+    objectID: id,
+    title: title,
     author: {
-      name: post.primary_author.name,
-      url: post.primary_author.url,
+      name: primary_author.name,
+      url: primary_author.url,
       profileImage: profileImageUrl
     },
-    tags: post.tags.map((obj) => {
+    tags: tags.map((obj) => {
       return {
         name: obj.name,
         url: obj.url
       };
     }),
-    url: post.url,
-    featureImage: post.feature_image,
-    publishedAt: post.published_at,
-    publishedAtTimestamp: (new Date(post.published_at).getTime() / 1000) | 0
+    url: url,
+    featureImage: feature_image,
+    publishedAt: published_at,
+    publishedAtTimestamp: (new Date(published_at).getTime() / 1000) | 0,
+    filterTerms: algoliaFilterRegex.reduce((acc, regex) => {
+      const isMatch = title.match(regex);
+      if (isMatch) acc.push(isMatch[0].toLowerCase());
+
+      return acc;
+    }, [])
   };
 };
 
