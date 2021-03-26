@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
+  "scripts": {
+    "start": "sls offline",
+    "deploy": "sls deploy --stage prod",
+    "deploy-dev": "sls deploy",
+    "format": "prettier-eslint --eslint-config-path $PWD/.eslintrc.json --write $PWD'**/*.js'",
+    "lint": "eslint . --ext .js"
+  },
   "dependencies": {
     "algoliasearch": "^4.5.1"
   },
@@ -16,13 +23,6 @@
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "serverless-offline": "^6.8.0"
-  },
-  "scripts": {
-    "start": "sls offline",
-    "deploy": "sls deploy --stage prod",
-    "deploy-dev": "sls deploy",
-    "format": "prettier-eslint --eslint-config-path $PWD/.eslintrc.json --write $PWD'**/*.js'",
-    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
