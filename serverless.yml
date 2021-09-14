@@ -13,7 +13,7 @@ provider:
     ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY}
 
 custom:
-  awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer}
+  awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer~true}
 
 functions:
   addIndex:
