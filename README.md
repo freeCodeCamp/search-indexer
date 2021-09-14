@@ -27,7 +27,6 @@ Here are the currently configured origins and Algolia indices:
 
 - AWS CLI and an AWS account with access to Secrets Manager
 - An [Algolia](https://www.algolia.com/) account access to the pre-configured indices above (see table)
-- The [Serverless](https://www.serverless.com/)
 
 ## How to prepare your local machine
 
