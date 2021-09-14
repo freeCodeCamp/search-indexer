@@ -24,7 +24,7 @@
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "serverless": "^2.58.0",
-    "serverless-offline": "^6.8.0"
+    "serverless-offline": "^6.9.0"
   },
   "repository": {
     "type": "git",
