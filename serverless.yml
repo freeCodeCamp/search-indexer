@@ -1,4 +1,5 @@
 service: serverless-indexer
+variablesResolutionMode: 20210326
 
 provider:
   name: aws
@@ -13,7 +14,7 @@ provider:
     ALGOLIA_ADMIN_KEY: ${self:custom.awsSecrets.ALGOLIA_ADMIN_KEY}
 
 custom:
-  awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer~true}
+  awsSecrets: ${ssm:/aws/reference/secretsmanager/serverless-indexer}
 
 functions:
   addIndex:
