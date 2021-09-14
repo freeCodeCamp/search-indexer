@@ -4,6 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
+    "sls": "serverless",
     "start": "sls offline",
     "deploy": "sls deploy --stage prod",
     "deploy-dev": "sls deploy",
@@ -22,6 +23,7 @@
     "prettier": "^2.1.2",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
+    "serverless": "^2.58.0",
     "serverless-offline": "^6.8.0"
   },
   "repository": {
