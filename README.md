@@ -4,26 +4,26 @@ This is a set of Lambda functions written in the [Serverless](https://www.server
 
 Here are the current Ghost events / webhooks, and their endpoints:
 
-| Ghost Event | Endpoint |
-| ---- | ---- |
-| Post published | .../*stage*/add-index |
-| Post unpublished | .../*stage*/delete-index |
-| Post deleted | .../*stage*/deleted-index |
-| Published post updated | .../*stage*/update-index |
+| Ghost Event            | Endpoint                  |
+| ---------------------- | ------------------------- |
+| Post published         | .../_stage_/add-index     |
+| Post unpublished       | .../_stage_/delete-index  |
+| Post deleted           | .../_stage_/deleted-index |
+| Published post updated | .../_stage_/update-index  |
 
 The Lambda function on each endpoint receives the blog post from the Ghost webhook and updates the correct [Algolia](https://www.algolia.com/) index based on the origin of the Ghost webhook.
 
 Here are the currently configured origins and Algolia indices:
 
-| Ghost Origin | Algolia index |
-| ---- | ---- |
-| http://localhost:2368 | dev-news |
-| https://www.freecodecamp.org/news/ | news |
-| https://www.freecodecamp.org/espanol/news/ | news-es |
-| https://chinese.freecodecamp.org/news/ | news-zh |
-| https://www.freecodecamp.org/portuguese/news/ | news-pt |
+| Ghost Origin                                  | Algolia index |
+| --------------------------------------------- | ------------- |
+| http://localhost:2368                         | dev-news      |
+| https://www.freecodecamp.org/news/            | news          |
+| https://www.freecodecamp.org/espanol/news/    | news-es       |
+| https://chinese.freecodecamp.org/news/        | news-zh       |
+| https://www.freecodecamp.org/portuguese/news/ | news-pt       |
 
-**Prerequisites**: 
+**Prerequisites**:
 
 - AWS CLI and an AWS account with access to Secrets Manager
 - An [Algolia](https://www.algolia.com/) account access to the pre-configured indices above (see table)
