@@ -40,7 +40,7 @@ async function deleteIndex(req) {
   // unpublished or deleted
   if (publishedStatus) {
     // Deleted articles don't include an article url. But since
-    // every article must include at least one article, set index
+    // every article must include at least one author, set index
     // based on primary author page url instead
     const primaryAuthorUrl = prevState.authors
       ? prevState.authors[0].url
