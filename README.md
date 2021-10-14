@@ -17,7 +17,6 @@ Here are the currently configured origins and Algolia indices:
 
 | Ghost Origin                                  | Algolia index |
 | --------------------------------------------- | ------------- |
-| http://localhost:2368                         | dev-news      |
 | https://www.freecodecamp.org/news/            | news          |
 | https://www.freecodecamp.org/espanol/news/    | news-es       |
 | https://chinese.freecodecamp.org/news/        | news-zh       |
