@@ -22,6 +22,7 @@ Here are the currently configured origins and Algolia indices:
 | https://www.freecodecamp.org/espanol/news/    | news-es       |
 | https://chinese.freecodecamp.org/news/        | news-zh       |
 | https://www.freecodecamp.org/portuguese/news/ | news-pt       |
+| https://www.freecodecamp.org/italian/news/    | news-it       |
 
 **Prerequisites**:
 
