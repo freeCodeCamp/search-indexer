@@ -26,14 +26,5 @@
     "serverless": "^2.58.0",
     "serverless-offline": "^8.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/scissorsneedfoodtoo/serverless-indexer.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/scissorsneedfoodtoo/serverless-indexer/issues"
-  },
-  "homepage": "https://github.com/scissorsneedfoodtoo/serverless-indexer#readme"
+  "license": "BSD-3-Clause"
 }
