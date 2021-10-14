@@ -40,13 +40,14 @@ Here are the currently configured origins and Algolia indices:
 
 ## How to deploy changes
 
-1. After a PR with changes is accepted and merged, deploy changes with `npm run deploy`
+1. After a PR with changes is accepted and merged, deploy changes with `npm run deploy-dev` or `npm run deploy`
 
 ## How to change Algolia API keys on AWS
 
 ### Generate a new key on Algolia
 
 1. Sign into Algolia with the dev@freecodecamp.org account
+1. Select the `dev` or `Production` application from the dropdown at the top of the page
 1. Click "API Keys", then click the "All API Keys" tab near the top of the screen
 1. Click the "New API Key" button, and generate a new key with the following ACLs (action control lists): `search`, `addObject`, `deleteObject`, `browse`, `listIndexes`, `deleteIndex`
 1. Click the "Create" button
@@ -58,5 +59,18 @@ Here are the currently configured origins and Algolia indices:
 1. Sign in and go to https://us-east-2.console.aws.amazon.com/secretsmanager/
 1. Click "serverless-indexer"
 1. Click "Retrieve secret value" and click the "Edit" button
-1. Paste the new Algolia API key in as the value of `ALGOLIA_ADMIN_KEY`
+1. Paste the new Algolia API key in as the value of `ALGOLIA_ADMIN_KEY` in either the `dev` or `prod` object
 1. Click the "Save" button
+
+## How to remove a service
+
+**WARNING**: Removing a `dev` or `prod` service is only necessary in a few cases, such as migrating to a new region.
+
+By removing a service, the base URL for the Lambda functions will be lost. This means that all the webhooks in each Ghost instance will need to be updated once the service is redeployed.
+
+To deploy updates, it's not necessary to remove a service first. Just follow the deployment instructions [here](#how-to-deploy-changes).
+
+Use the following commands with caution:
+
+1. Install Serverless globally with `npm install -g serverless`
+1. Run `serverless remove --stage [dev / prod] --region us-east-2`
