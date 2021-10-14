@@ -63,6 +63,7 @@ const setIndex = (url) => {
   paths.forEach((path) => {
     if (url.startsWith(path)) {
       indexStr = indexNameMap[path];
+      return;
     }
   });
 
