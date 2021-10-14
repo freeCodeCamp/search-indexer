@@ -38,6 +38,14 @@ Here are the currently configured origins and Algolia indices:
 1. In `.env.yml` set `AWS_PROFILE` to `'news-indexer-lambda'`
 1. Start developing
 
+## How to develop and test locally
+
+1. Make your changes and run `npm start`
+1. Open your local Ghost Integrations dashboard at http://localhost:2368/ghost/#/settings/integrations
+1. Click "Add custom integration" to create a new custom integration
+1. Check the console output and add the Lambda function URLs (ex: https://localhost:3000/dev/add-index) to the correct Ghost events. Check the Ghost events and endpoints table near the top of this document for more information
+1. If you make changes while the server is running, kill the server with Ctrl / Cmd + C. Then restart the server with `npm start` to test your changes
+
 ## How to deploy changes
 
 1. After a PR with changes is accepted and merged, deploy changes with `npm run deploy-dev` or `npm run deploy`
