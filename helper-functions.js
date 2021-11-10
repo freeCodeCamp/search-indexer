@@ -53,7 +53,9 @@ const indexNameMap = {
   'https://www.freecodecamp.org/espanol/news/': 'news-es',
   'https://chinese.freecodecamp.org/news/': 'news-zh',
   'https://www.freecodecamp.org/portuguese/news/': 'news-pt-br',
-  'https://www.freecodecamp.org/italian/news/': 'news-it'
+  'https://www.freecodecamp.org/italian/news/': 'news-it',
+  'https://www.freecodecamp.org/ukrainian/news/': 'news-uk',
+  'https://www.freecodecamp.org/japanese/news/': 'news-ja'
 };
 
 const setIndex = (url) => {
