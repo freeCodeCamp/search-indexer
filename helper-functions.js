@@ -64,7 +64,7 @@ const setIndex = (url) => {
     }
   });
 
-  return algoliaApp.initIndex(indexStr);
+  return indexStr ? algoliaApp.initIndex(indexStr) : null;
 };
 
 module.exports = {
