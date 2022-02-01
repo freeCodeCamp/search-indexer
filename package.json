@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
   "scripts": {
     "sls": "serverless",
     "start": "sls offline",
@@ -11,7 +15,7 @@
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --ext .js --cache",
-    "lint:pretty": "prettier --check .",
+    "lint:pretty": "prettier --ignore-path .gitignore --check .",
     "prepare": "husky install"
   },
   "dependencies": {
