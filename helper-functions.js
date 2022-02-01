@@ -3,15 +3,8 @@ const algolia = require('algoliasearch');
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
 const formatPost = (post) => {
-  const {
-    id,
-    title,
-    primary_author,
-    tags,
-    url,
-    feature_image,
-    published_at
-  } = post;
+  const { id, title, primary_author, tags, url, feature_image, published_at } =
+    post;
   const currProfileImg = primary_author.profile_image;
   const profileImageUrl =
     currProfileImg && currProfileImg.includes('//www.gravatar.com/avatar/')
