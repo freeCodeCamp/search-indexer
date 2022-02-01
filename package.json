@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
   "scripts": {
     "sls": "serverless",
     "start": "sls offline",
