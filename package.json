@@ -18,7 +18,7 @@
     "@freecodecamp/eslint-config": "2.0.2",
     "babel-eslint": "10.1.0",
     "eslint": "8.8.0",
-    "eslint-config-prettier": "6.15.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "prettier": "2.5.1",
     "prettier-eslint": "13.0.0",
