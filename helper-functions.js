@@ -44,7 +44,7 @@ const indexNameMap = {
   'https://www.freecodecamp.dev/news/': 'news-dev',
   'https://www.freecodecamp.org/news/': 'news',
   'https://www.freecodecamp.org/espanol/news/': 'news-es',
-  'https://chinese.freecodecamp.org/news/': 'news-zh',
+  'https://www.freecodecamp.org/chinese/news/': 'news-zh',
   'https://www.freecodecamp.org/portuguese/news/': 'news-pt-br',
   'https://www.freecodecamp.org/italian/news/': 'news-it',
   'https://www.freecodecamp.org/ukrainian/news/': 'news-uk',
