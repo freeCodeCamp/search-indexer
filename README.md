@@ -27,6 +27,12 @@ Here are the currently configured origins and Algolia indices:
 | https://www.freecodecamp.org/arabic/news/     | news-ar       |
 | https://www.freecodecamp.org/bengali/news/    | news-bn       |
 | https://www.freecodecamp.org/urdu/news/       | news-ur       |
+| https://www.freecodecamp.org/swahili/news/    | news-sw       |
+| https://www.freecodecamp.org/korean/news/     | news-ko       |
+| https://www.freecodecamp.org/turkish/news/    | news-tr       |
+| https://www.freecodecamp.org/french/news/     | news-fr       |
+| https://www.freecodecamp.org/hindi/news/      | news-hi       |
+| https://www.freecodecamp.org/german/news/     | news-de       |
 
 **Prerequisites**:
 
