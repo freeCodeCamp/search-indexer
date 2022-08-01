@@ -33,6 +33,8 @@ Here are the currently configured origins and Algolia indices:
 | https://www.freecodecamp.org/french/news/     | news-fr       |
 | https://www.freecodecamp.org/hindi/news/      | news-hi       |
 | https://www.freecodecamp.org/german/news/     | news-de       |
+| https://www.freecodecamp.org/vietnamese/news/ | news-vi       |
+| https://www.freecodecamp.org/indonesian/news/ | news-id       |
 
 **Prerequisites**:
 
