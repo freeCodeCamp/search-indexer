@@ -35,6 +35,7 @@ Here are the currently configured origins and Algolia indices:
 | https://www.freecodecamp.org/german/news/     | news-de       |
 | https://www.freecodecamp.org/vietnamese/news/ | news-vi       |
 | https://www.freecodecamp.org/indonesian/news/ | news-id       |
+| https://www.freecodecamp.org/haitian/news/    | news-ht       |
 
 **Prerequisites**:
 
