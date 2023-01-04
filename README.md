@@ -1,6 +1,6 @@
-# Serverless Indexer
+# Search Indexer
 
-This is a set of Lambda functions written in the [Serverless](https://www.serverless.com/) framework that are triggered by webhooks on [Ghost](https://ghost.org/).
+This is a set of Lambda functions written in the [Serverless](https://www.serverless.com/) framework that are triggered by webhooks on our self-hosted [Ghost](https://ghost.org/) instances. These index articles on various news instances into our universal search bar.
 
 Here are the current Ghost events / webhooks, and their endpoints:
 
