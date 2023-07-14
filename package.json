@@ -24,7 +24,7 @@
   "devDependencies": {
     "@freecodecamp/eslint-config": "2.0.2",
     "babel-eslint": "10.1.0",
-    "eslint": "8.44.0",
+    "eslint": "8.45.0",
     "eslint-config-prettier": "8.8.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
