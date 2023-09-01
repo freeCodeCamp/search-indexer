@@ -2,7 +2,7 @@ service: serverless-indexer
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
   stage: ${opt:stage, 'dev'}
   profile: ${file(./.env.yml):AWS_PROFILE}
   region: us-east-2
