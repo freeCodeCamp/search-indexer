@@ -30,7 +30,7 @@
     "lint-staged": "15.2.5",
     "npm-run-all2": "6.2.0",
     "prettier": "3.3.0",
-    "serverless": "3.38.0",
+    "serverless": "3.39.0",
     "serverless-offline": "13.6.0"
   },
   "lint-staged": {
