@@ -14,7 +14,7 @@
     "deploy-dev": "sls deploy",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",
-    "lint:code": "eslint . --ext .js --cache",
+    "lint:code": "eslint . --cache",
     "lint:pretty": "prettier --ignore-path .gitignore --check .",
     "prepare": "husky"
   },
@@ -22,10 +22,12 @@
     "algoliasearch": "^4.5.1"
   },
   "devDependencies": {
-    "@freecodecamp/eslint-config": "2.0.2",
+    "@babel/core": "7.24.7",
     "@babel/eslint-parser": "7.24.7",
+    "@eslint/js": "9.6.0",
     "eslint": "9.6.0",
     "eslint-config-prettier": "9.1.0",
+    "globals": "15.8.0",
     "husky": "9.0.11",
     "lint-staged": "15.2.7",
     "npm-run-all2": "6.2.0",
