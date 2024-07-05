@@ -1,5 +1,5 @@
 const { ALGOLIA_ID, ALGOLIA_ADMIN_KEY } = process.env;
-const algolia = require('algoliasearch');
+import algolia from 'algoliasearch';
 const algoliaApp = algolia(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
 const formatPost = (post) => {
@@ -77,7 +77,4 @@ const setIndex = (url) => {
   return indexStr ? algoliaApp.initIndex(indexStr) : null;
 };
 
-module.exports = {
-  formatPost,
-  setIndex
-};
+export { formatPost, setIndex };

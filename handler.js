@@ -1,4 +1,4 @@
-const { formatPost, setIndex } = require('./helper-functions');
+import { formatPost, setIndex } from './helper-functions.js';
 
 async function addIndex(req) {
   const body = JSON.parse(req.body);
@@ -112,8 +112,4 @@ async function updateIndex(req) {
   }
 }
 
-module.exports = {
-  addIndex,
-  updateIndex,
-  deleteIndex
-};
+export { addIndex, updateIndex, deleteIndex };

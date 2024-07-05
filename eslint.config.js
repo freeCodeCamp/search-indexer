@@ -1,14 +1,14 @@
-const globals = require('globals');
-const pluginJs = require('@eslint/js');
-const configPrettier = require('eslint-config-prettier');
+import globals from 'globals';
+import js from '@eslint/js';
+import configPrettier from 'eslint-config-prettier';
 
-module.exports = [
-  pluginJs.configs.recommended,
+export default [
+  js.configs.recommended,
   configPrettier,
   {
     files: ['**/*.js'],
     ignores: ['**/node_modules/**'],
-    languageOptions: { sourceType: 'commonjs', globals: globals.node },
+    languageOptions: { sourceType: 'module', globals: { ...globals.node } },
     rules: {
       'max-len': [
         'error',
