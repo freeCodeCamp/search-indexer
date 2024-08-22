@@ -34,7 +34,7 @@
     "npm-run-all2": "6.2.2",
     "prettier": "3.3.3",
     "serverless": "3.39.0",
-    "serverless-offline": "13.6.0"
+    "serverless-offline": "13.7.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
