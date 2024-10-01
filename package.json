@@ -28,7 +28,7 @@
     "@eslint/js": "9.11.1",
     "eslint": "9.11.1",
     "eslint-config-prettier": "9.1.0",
-    "globals": "15.9.0",
+    "globals": "15.10.0",
     "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "npm-run-all2": "6.2.3",
