@@ -20,7 +20,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "algoliasearch": "^4.5.1"
+    "algoliasearch": "4.5.1"
   },
   "devDependencies": {
     "@babel/core": "7.25.8",
