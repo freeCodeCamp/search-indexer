@@ -13,6 +13,7 @@
     "start": "sls offline",
     "deploy": "sls deploy --stage prod",
     "deploy-dev": "sls deploy",
+    "predo-deploy": "node do-functions/utils/copy-files.js",
     "do-deploy": "doctl serverless deploy do-functions",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",

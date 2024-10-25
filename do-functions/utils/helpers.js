@@ -2,8 +2,6 @@ import 'dotenv/config';
 import { gql, request } from 'graphql-request';
 
 export const getPost = async (id) => {
-  console.log({ id, dotenvTest: process.env.DEV_ALGOLIA_ID });
-
   try {
     const query = gql`
       query getPost($id: ID!) {

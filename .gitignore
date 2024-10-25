@@ -17,4 +17,5 @@ jspm_packages
 # DO Functions specific
 .deployed
 __deployer__.zip
-bundle.js
+do-functions/packages/**/**/helpers.js
+do-functions/packages/**/**/package*.json
