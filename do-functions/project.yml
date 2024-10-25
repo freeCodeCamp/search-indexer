@@ -1,0 +1,26 @@
+# parameters: {}
+# environment: {}
+# packages:
+#   - name: hashnode
+#     shared: false
+#     environment: {}
+#     parameters: {}
+#     annotations: {}
+#     functions:
+#       - name: add-index
+#         binary: false
+#         main: 'addIndex'
+#         runtime: nodejs:18
+#         web: true
+#         webSecure: false
+#         parameters: {}
+#         environment: {}
+#         annotations: {}
+#         limits: {}
+
+packages:
+  - name: hashnode
+    functions:
+      - name: add-index
+        main: 'addIndex'
+        runtime: nodejs:18
