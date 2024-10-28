@@ -1,6 +1,19 @@
+environment:
+  PRD_ALGOLIA_ID: ${PRD_ALGOLIA_ID}
+  PRD_ALGOLIA_ADMIN_KEY: ${PRD_ALGOLIA_ADMIN_KEY}
+
+  DEV_ALGOLIA_ID: ${DEV_ALGOLIA_ID}
+  DEV_ALGOLIA_ADMIN_KEY: ${DEV_ALGOLIA_ADMIN_KEY}
+
+  NODE_ENV: ${NODE_ENV}
+
 packages:
   - name: hashnode
     functions:
       - name: add-index
         main: 'addIndex'
+        runtime: nodejs:18
+
+      - name: show-hits
+        main: 'showHits'
         runtime: nodejs:18

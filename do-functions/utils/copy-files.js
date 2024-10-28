@@ -1,13 +1,14 @@
-import { copyFileSync, existsSync } from 'fs';
+import { copyFileSync, existsSync, readdirSync } from 'fs';
 import { basename, join } from 'path';
 const __dirname = import.meta.dirname;
 
 const platforms = ['hashnode'];
-const functionDirectoyNames = ['add-index'];
+const functionDirectoyNames = readdirSync(
+  join(__dirname, '../packages/hashnode')
+).filter((directoryName) => !/(^|\/)\.[^\/\.]/g.test(directoryName)); // Filter out hidden directories like .DS_Store
 const targetFilePaths = [
   join(__dirname, './helpers.js'),
-  join(__dirname, '../package.json'),
-  join(__dirname, '../../.env') // TODO: remove this once we decide how to handle env vars on DO's platform
+  join(__dirname, '../package.json')
 ];
 
 platforms.forEach((platform) => {

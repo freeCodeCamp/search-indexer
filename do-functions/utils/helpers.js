@@ -1,5 +1,18 @@
 import 'dotenv/config';
 import { gql, request } from 'graphql-request';
+import { algoliasearch } from 'algoliasearch';
+
+const { NODE_ENV } = process.env;
+const algoliaID =
+  NODE_ENV === 'production'
+    ? process.env.PRD_ALGOLIA_ID
+    : process.env.DEV_ALGOLIA_ID;
+const algoliaAdminKey =
+  NODE_ENV === 'production'
+    ? process.env.PRD_ALGOLIA_ADMIN_KEY
+    : process.env.DEV_ALGOLIA_ADMIN_KEY;
+
+const algoliaClient = algoliasearch(algoliaID, algoliaAdminKey);
 
 export const getPost = async (id) => {
   try {
@@ -66,4 +79,13 @@ export const formatPost = (post) => {
       return acc;
     }, [])
   };
+};
+
+export const getHits = async () => {
+  // Note: Currently only the English publication is on Hashnode, and
+  // the English indices are named 'news' in both the prod and dev
+  // Algolia apps
+  const hits = await algoliaClient.browse({ indexName: 'news' });
+
+  return hits;
 };
