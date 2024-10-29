@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Shared package.json for the serverless search indexer built with DigitalOcean Functions",
   "type": "module",
+  "scripts": {
+    "install": "echo 'Packages shouldn't be installed in the `do-functions` directory. This file will be copied into each function's directory and the `install` command will be run as part of the build process before deployment.'"
+  },
   "dependencies": {
     "algoliasearch": "5.10.2",
     "dotenv": "16.4.5",
