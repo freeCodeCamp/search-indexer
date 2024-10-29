@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "algoliasearch": "5.10.2",
-    "dotenv": "16.4.5",
     "graphql-request": "7.1.0"
   },
   "license": "BSD-3-Clause"

@@ -1,18 +1,12 @@
-import 'dotenv/config';
 import { gql, request } from 'graphql-request';
 import { algoliasearch } from 'algoliasearch';
 
-const { NODE_ENV } = process.env;
-const algoliaID =
-  NODE_ENV === 'production'
-    ? process.env.PRD_ALGOLIA_ID
-    : process.env.DEV_ALGOLIA_ID;
-const algoliaAdminKey =
-  NODE_ENV === 'production'
-    ? process.env.PRD_ALGOLIA_ADMIN_KEY
-    : process.env.DEV_ALGOLIA_ADMIN_KEY;
+console.log(process.env.ALGOLIA_ID, process.env.ALGOLIA_ADMIN_KEY);
 
-export const algoliaClient = algoliasearch(algoliaID, algoliaAdminKey);
+export const algoliaClient = algoliasearch(
+  process.env.ALGOLIA_ID,
+  process.env.ALGOLIA_ADMIN_KEY
+);
 
 export const getPost = async (id) => {
   try {
