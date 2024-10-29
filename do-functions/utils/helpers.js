@@ -60,7 +60,7 @@ export const formatPost = (post) => {
     author: {
       name: author.name,
       url: `https://www.freecodecamp.org/news/author/${author.username}`,
-      profileImage: author.profilePicture
+      profileImage: author?.profilePicture ? author?.profilePicture : null
     },
     tags: tags.map((tag) => {
       return {
@@ -69,7 +69,7 @@ export const formatPost = (post) => {
       };
     }),
     url: `https://www.freecodecamp.org/news/${slug}/`,
-    featureImage: coverImage.url,
+    featureImage: coverImage ? coverImage?.url : null,
     publishedAt: publishedAt,
     publishedAtTimestamp: (new Date(publishedAt).getTime() / 1000) | 0,
     filterTerms: algoliaFilterRegex.reduce((acc, regex) => {
