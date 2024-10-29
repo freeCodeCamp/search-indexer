@@ -1,8 +1,14 @@
-import { algoliaClient, formatPost, getPost } from './helpers.js'; // Import from the same directory due to the pre deployment scripting process
+// The ../../../lib/utils directory is zipped in the same directory
+// as the function during the build process
+import { algoliaClient, formatPost, getPost } from './utils/helpers.js';
 
 export const addOrUpdateRecord = async (req) => {
   try {
-    const { id } = req?.data?.post;
+    const id = req?.data?.post?.id;
+    if (!id) {
+      throw new Error('No id found in request');
+    }
+
     const post = await getPost(id);
     const formattedPost = formatPost(post);
     const { objectID } = formattedPost;

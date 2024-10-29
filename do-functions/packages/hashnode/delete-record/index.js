@@ -1,8 +1,13 @@
-import { algoliaClient } from './helpers.js'; // Import from the same directory due to the pre deployment scripting process
+// The ../../../lib/utils directory is zipped in the same directory
+// as the function during the build process
+import { algoliaClient } from './utils/helpers.js';
 
 export const deleteRecord = async (req) => {
   try {
-    const { id } = req?.data?.post;
+    const id = req?.data?.post?.id;
+    if (!id) {
+      throw new Error('No id found in request');
+    }
 
     // Note: Currently only the English publication is on Hashnode, and
     // the English indices are named 'news' in both the prod and dev
@@ -11,8 +16,6 @@ export const deleteRecord = async (req) => {
       indexName: 'news',
       objectID: id
     });
-
-    console.log(algoliaRes);
 
     return {
       statusCode: 200,
