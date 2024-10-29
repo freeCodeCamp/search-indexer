@@ -80,12 +80,3 @@ export const formatPost = (post) => {
     }, [])
   };
 };
-
-export const getHits = async () => {
-  // Note: Currently only the English publication is on Hashnode, and
-  // the English indices are named 'news' in both the prod and dev
-  // Algolia apps
-  const hits = await algoliaClient.browse({ indexName: 'news' });
-
-  return hits;
-};

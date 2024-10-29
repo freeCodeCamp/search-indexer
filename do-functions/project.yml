@@ -10,10 +10,6 @@ environment:
 packages:
   - name: hashnode
     functions:
-      - name: add-record
-        main: 'addRecord'
-        runtime: nodejs:18
-
-      - name: show-hits
-        main: 'showHits'
+      - name: add-or-update-record
+        main: 'addOrUpdateRecord'
         runtime: nodejs:18
