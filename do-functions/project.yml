@@ -13,3 +13,7 @@ packages:
       - name: add-or-update-record
         main: 'addOrUpdateRecord'
         runtime: nodejs:18
+
+      - name: delete-record
+        main: 'deleteRecord'
+        runtime: nodejs:18
