@@ -1,8 +1,6 @@
 import { gql, request } from 'graphql-request';
 import { algoliasearch } from 'algoliasearch';
 
-console.log(process.env.ALGOLIA_ID, process.env.ALGOLIA_ADMIN_KEY);
-
 export const algoliaClient = algoliasearch(
   process.env.ALGOLIA_ID,
   process.env.ALGOLIA_ADMIN_KEY
