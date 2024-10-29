@@ -12,7 +12,7 @@ const algoliaAdminKey =
     ? process.env.PRD_ALGOLIA_ADMIN_KEY
     : process.env.DEV_ALGOLIA_ADMIN_KEY;
 
-const algoliaClient = algoliasearch(algoliaID, algoliaAdminKey);
+export const algoliaClient = algoliasearch(algoliaID, algoliaAdminKey);
 
 export const getPost = async (id) => {
   try {
