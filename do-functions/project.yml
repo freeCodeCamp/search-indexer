@@ -10,8 +10,8 @@ environment:
 packages:
   - name: hashnode
     functions:
-      - name: add-index
-        main: 'addIndex'
+      - name: add-record
+        main: 'addRecord'
         runtime: nodejs:18
 
       - name: show-hits
