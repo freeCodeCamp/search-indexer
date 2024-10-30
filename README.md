@@ -1,5 +1,56 @@
 # Search Indexer
 
+## DigitalOcean Functions
+
+Note: Currently only the English publication on Hashnode is using DigitalOcean Functions. The other publications are using AWS Lambda deployed via the Serverless Framework.
+
+This is a pair of functions that are triggered by Hashnode webhooks to index posts from our English publication into Algolia for our search bar. They're built with DigitalOcean Functions and are deployed using the [doctl](https://docs.digitalocean.com/reference/doctl/) CLI to the fCC Team's DigitalOcean account.
+
+Here are the current Hashnode events / webhooks, and their endpoints:
+
+| Hashnode Event         | Endpoint                 |
+| ---------------------- | ------------------------ |
+| Post published         | .../add-or-update-record |
+| Post deleted           | .../delete-record        |
+| Published post updated | .../add-or-update-record |
+
+And here are the currently configured Algolia indices:
+
+| Publication URL                    | Algolia index |
+| ---------------------------------- | ------------- |
+| https://www.freecodecamp.org/news/ | news          |
+
+**Prerequisites**:
+
+- [doctl](https://docs.digitalocean.com/reference/doctl/) installed
+- An account on DigitalOcean with member-level access to the fCC Team
+- Access to the Technical Accounts vault on 1Password
+- An [Algolia](https://www.algolia.com/) account access to the pre-configured indices above (see table)
+
+## How to prepare your local machine
+
+1. Clone this repo and run `npm ci` from the root directory to install the necessary packages.
+1. Go to 1Password, search for the shared `[.env.*] [dev] [prd] Search Indexer` note.
+1. Within the `do-functions-directory` create two new files named `.env.dev` and `.env.prd`, and set `ALGOLIA_APP_ID` and `ALGOLIA_ADMIN_KEY` to the Algolia application ID and admin key for each respective stage using the values from the 1Password note above.
+1. If this is your first time using doctl, create a new `fcc-dev` context with `doctl auth init --context fcc-dev` (the context can be named anything, but `fcc-dev` will be used in the examples below).
+1. Go to 1Password, search for the shared `[PAT] [Digital Ocean] fcc-dev-doctl-token (serverless indexer)` note, copy the PAT, and paste it into the terminal when prompted.
+1. Run `doctl auth switch --context fcc-dev` to switch to the `fcc-dev` context.
+
+## General notes about DigitalOcean Functions
+
+1. Currently, since we're supporting both AWS Lambda and DigitalOcean Functions, all DO Function related code is in the `do-functions` directory. Later on, we can move the DO Functions to the root directory and update the deployment scripts accordingly.
+1. Functions are all within the `packages` directory, and each function has its own directory with an `index.js` and `.include` file. The `.include` file is used to include the necessary dependencies for the function.
+1. The `lib` directory contains shared code that is used by all functions. This includes the `utils/helpers.js` file, which contains the Algolia client and other shared functions, the `package.json` file, and `node_modules` directory, which is created during the build process and should be copied to each function directory using the `.include` file.
+1. New packages, which are groups of functions, and individual functions, should be added to the `project.yml` file. Each package and function is mapped to directories within the `packages` directory. The `project.yml` file is used by the `doctl` CLI to deploy the functions to DigitalOcean.
+
+## How to develop and test updates
+
+1. For testing updates to code or NPm packages, use a personal Hashnode publication with webhooks pointing to the functions in the `dev-search-indexer` namespace, which is pre-configured on DigitalOcean. This way you can test changes without affecting the production Algolia index.
+1. To deploy changes to the `dev-search-indexer` namespace, run `npm run do-deploy-dev` from the root directory.
+1. Once you're satisfied with the changes, deploy the changes to the production namespace with `npm run do-deploy-prd` from the root directory.
+
+## Serverless Framework
+
 These are a group of Lambda functions that are designed to be triggered by webhooks on our self-hosted [Ghost](https://ghost.org/) instances. These functions are created using the [Serverless](https://www.serverless.com/) framework and are used to index articles from various news sources into a universal search bar.
 
 Here are the current Ghost events / webhooks, and their endpoints:
@@ -17,25 +68,13 @@ Here are the currently configured origins and Algolia indices:
 
 | Ghost Origin                                  | Algolia index |
 | --------------------------------------------- | ------------- |
-| http://localhost:2368                         | news-dev      |
-| https://www.freecodecamp.org/news/            | news          |
-| https://www.freecodecamp.org/espanol/news/    | news-es       |
 | https://chinese.freecodecamp.org/news/        | news-zh       |
-| https://www.freecodecamp.org/portuguese/news/ | news-pt-br    |
+| https://www.freecodecamp.org/espanol/news/    | news-es       |
 | https://www.freecodecamp.org/italian/news/    | news-it       |
 | https://www.freecodecamp.org/japanese/news/   | news-ja       |
-| https://www.freecodecamp.org/arabic/news/     | news-ar       |
-| https://www.freecodecamp.org/bengali/news/    | news-bn       |
-| https://www.freecodecamp.org/urdu/news/       | news-ur       |
-| https://www.freecodecamp.org/swahili/news/    | news-sw       |
 | https://www.freecodecamp.org/korean/news/     | news-ko       |
-| https://www.freecodecamp.org/turkish/news/    | news-tr       |
-| https://www.freecodecamp.org/french/news/     | news-fr       |
-| https://www.freecodecamp.org/hindi/news/      | news-hi       |
-| https://www.freecodecamp.org/german/news/     | news-de       |
-| https://www.freecodecamp.org/vietnamese/news/ | news-vi       |
-| https://www.freecodecamp.org/indonesian/news/ | news-id       |
-| https://www.freecodecamp.org/haitian/news/    | news-ht       |
+| https://www.freecodecamp.org/portuguese/news/ | news-pt-br    |
+| https://www.freecodecamp.org/ukrainian/news/  | news-uk       |
 
 **Prerequisites**:
 
