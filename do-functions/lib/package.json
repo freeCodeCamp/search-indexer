@@ -4,7 +4,7 @@
   "description": "Shared package.json for the serverless search indexer built with DigitalOcean Functions",
   "type": "module",
   "dependencies": {
-    "algoliasearch": "5.10.2",
+    "algoliasearch": "5.12.0",
     "graphql-request": "7.1.0"
   },
   "license": "BSD-3-Clause"
