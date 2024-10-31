@@ -1,0 +1,6 @@
+../../../lib/package.json
+../../../lib/package-lock.json
+../../../lib/node_modules/
+../../../lib/utils/
+
+index.js

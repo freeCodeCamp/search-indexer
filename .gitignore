@@ -1,3 +1,6 @@
+# Secrets and settings
+.env*
+
 # package directories
 node_modules
 jspm_packages
@@ -5,8 +8,14 @@ jspm_packages
 # serverless directories
 .serverless
 
-# settings
-.env.yml
-
 # optional eslint cache
 .eslintcache
+
+# Other
+.DS_Store
+
+# DO Functions specific
+.deployed
+__deployer__.zip
+do-functions/packages/**/**/helpers.js
+do-functions/packages/**/**/package*.json
