@@ -1,53 +1,41 @@
 // The ../../../lib/utils directory is zipped in the same directory
 // as the function during the build process
-import {
-  algoliaClient,
-  formatGhostPost,
-  getSearchIndexName
-} from './utils/helpers.js';
+import { algoliaClient, getSearchIndexName } from './utils/helpers.js';
 
 export const deleteRecord = async (req) => {
   try {
-    const post = req?.post?.current;
+    // Deleting a published post returns the post
+    // obj in `req.post.previous`. Unpublishing a published
+    // post returns the post obj in `req.post.current`,
+    // so check both for an id to delete
+    const currState = req?.post?.current;
     const prevState = req?.post?.previous;
+    const targetId = currState?.id || prevState?.id;
 
-    // The Ghost webhook returns only the updated values in `req.post.previous`.
-    // Parse the keys from that and only trigger an update if specific values we
-    // use in search records have been updated including `published_at`, which
-    // appears when a draft is published
-    const updateEvents = [
-      'slug',
-      'title',
-      'authors',
-      'tags',
-      'feature_image',
-      'published_at'
-    ];
-    const diff = Object.keys(prevState).filter((val) =>
-      updateEvents.includes(val)
-    );
-
-    // Check if there are any meaningful changes before updating the record
-    // on Algolia
-    if (diff.length > 0) {
-      const formattedPost = formatGhostPost(post);
-      const { objectID, url } = formattedPost;
-      const indexName = getSearchIndexName(url);
+    // Whether a published post is unpublished or deleted, the
+    // status will be 'published' in the previous state
+    if (prevState.status === 'published') {
+      // Deleted posts don't include a url. But since every
+      // post must include at least one author, set the index
+      // based on the primary author page url instead
+      const primaryAuthorUrl = prevState.authors
+        ? prevState.authors[0].url
+        : currState.authors[0].url;
+      const indexName = getSearchIndexName(primaryAuthorUrl);
 
       if (!indexName) {
         throw new Error('No matching index found for the current post');
       }
 
-      const algoliaRes = await algoliaClient.addOrUpdateObject({
+      const algoliaRes = await algoliaClient.deleteObject({
         indexName,
-        objectID,
-        body: formattedPost
+        objectID: targetId
       });
 
       return {
         statusCode: 200,
         body: JSON.stringify({
-          objectID,
+          objectID: targetId,
           algoliaRes
         })
       };

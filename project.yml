@@ -9,6 +9,10 @@ packages:
         main: 'addOrUpdateRecord'
         runtime: nodejs:18
 
+      - name: delete-record
+        main: 'deleteRecord'
+        runtime: nodejs:18
+
   - name: hashnode
     functions:
       - name: add-or-update-record
