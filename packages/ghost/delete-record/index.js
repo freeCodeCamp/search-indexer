@@ -6,23 +6,22 @@ import {
   getSearchIndexName
 } from './utils/helpers.js';
 
-export const addOrUpdateRecord = async (req) => {
+export const deleteRecord = async (req) => {
   try {
     const post = req?.post?.current;
     const prevState = req?.post?.previous;
 
     // The Ghost webhook returns only the updated values in `req.post.previous`.
     // Parse the keys from that and only trigger an update if specific values we
-    // use in search records have been updated including `status`, which appears
-    // when a draft is published for the first time, or is republished after being
-    // taken down
+    // use in search records have been updated including `published_at`, which
+    // appears when a draft is published
     const updateEvents = [
       'slug',
       'title',
       'authors',
       'tags',
       'feature_image',
-      'status'
+      'published_at'
     ];
     const diff = Object.keys(prevState).filter((val) =>
       updateEvents.includes(val)
