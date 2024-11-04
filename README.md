@@ -64,9 +64,9 @@ Finally, here are the currently configured Algolia indices for each publication:
 1. To deploy changes to the `dev-search-indexer` namespace, run `npm run do-deploy-dev` from the root directory.
 1. Once you're satisfied with the changes, deploy the changes to the production namespace with `npm run do-deploy-prd` from the root directory.
 
-## How to remove functions or namespaces
+## How to Destroy Functions or Namespaces
 
-**WARNING**: Removing `dev` or `prd` functions is only necessary in a few cases, such as migrating to a new region. While removing a function should still preserve the base URL for the function, it may cause the indicies for one or more publications to get out of sync. Removing a namespace will remove all functions within that namespace, and change the base URL, requiring all webhooks all publications to be updated.
+**WARNING**: Destroying `dev` or `prd` functions is only necessary in a few cases, such as renaming an existing function. While destroying a function should still preserve the base URL for the function, it may cause the indicies for one or more publications to get out of sync. Destroying a namespace will remove all functions within that namespace, and change the base URL, requiring all webhooks all publications to be updated.
 
-1. To remove a function, manually remove the function from the `project.yml` file and delete the function's directory from the `packages` directory. Next, go to the [DigitalOcean Functions dashboard](https://cloud.digitalocean.com/functions), select either the `dev-search-indexer` or `prd-search-indexer` namespace, and delete the function from the dashboard.
-1. To remove a namespace, go to the [DigitalOcean Functions dashboard](https://cloud.digitalocean.com/functions), select the namespace, and click the "Delete" button. This will remove all functions within the namespace and change the base URL for the functions.
+1. To remove a function, manually remove the function from the `project.yml` file and remove the function's directory from the `packages` directory. Next, go to the [DigitalOcean Functions dashboard](https://cloud.digitalocean.com/functions), select either the `dev-search-indexer` or `prd-search-indexer` namespace, and destroy the function from the dashboard.
+1. To remove a namespace, go to the [DigitalOcean Functions dashboard](https://cloud.digitalocean.com/functions) and destroy either the `dev-search-indexer` or `prd-search-indexer` namespace. This will remove all functions within the namespace and change the base URL for the functions. This should only need to be done when migrating to a new region or if the namespace is no longer needed.
