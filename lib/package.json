@@ -1,7 +1,7 @@
 {
   "name": "do-functions-search-indexer",
   "version": "1.0.0",
-  "description": "Shared package.json for the serverless search indexer built with DigitalOcean Functions",
+  "description": "Shared package.json for the serverless search indexer build and configured for the DigitalOcean Functions platform",
   "type": "module",
   "dependencies": {
     "algoliasearch": "5.12.0",
