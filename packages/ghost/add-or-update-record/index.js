@@ -14,8 +14,8 @@ export const addOrUpdateRecord = async (req) => {
     // The Ghost webhook returns only the updated values in `req.post.previous`.
     // Parse the keys from that and only trigger an update if specific values we
     // use in search records have been updated including `status`, which appears
-    // when a draft is published for the first time, or is republished after being
-    // taken down
+    // when a draft is published for the first time, or is republished after
+    // being taken down
     const updateEvents = [
       'slug',
       'title',
