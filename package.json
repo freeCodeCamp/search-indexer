@@ -9,14 +9,10 @@
     "npm": ">=10"
   },
   "scripts": {
-    "sls": "serverless",
-    "start": "sls offline",
-    "deploy": "sls deploy --stage prod",
-    "deploy-dev": "sls deploy",
     "predo-deploy": "doctl serverless connect prd-search-indexer",
-    "do-deploy": "doctl serverless deploy do-functions --env './do-functions/.env.prd'",
+    "do-deploy": "doctl serverless deploy '../search-indexer' --env '.env.prd'",
     "predo-deploy-dev": "doctl serverless connect dev-search-indexer",
-    "do-deploy-dev": "doctl serverless deploy do-functions --env './do-functions/.env.dev'",
+    "do-deploy-dev": "doctl serverless deploy '../search-indexer' --env '.env.dev'",
     "do-list-namespaces": "doctl serverless namespaces list",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",
@@ -37,9 +33,7 @@
     "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "npm-run-all2": "7.0.1",
-    "prettier": "3.3.3",
-    "serverless": "3.39.0",
-    "serverless-offline": "13.8.2"
+    "prettier": "3.3.3"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

@@ -3,6 +3,16 @@ environment:
   ALGOLIA_ADMIN_KEY: ${ALGOLIA_ADMIN_KEY}
 
 packages:
+  - name: ghost
+    functions:
+      - name: add-or-update-record
+        main: 'addOrUpdateRecord'
+        runtime: nodejs:18
+
+      - name: delete-record
+        main: 'deleteRecord'
+        runtime: nodejs:18
+
   - name: hashnode
     functions:
       - name: add-or-update-record
