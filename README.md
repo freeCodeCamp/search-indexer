@@ -19,12 +19,13 @@ And here are the current Ghost events / webhooks and their endpoints:
 | Post unpublished       | .../ghost/delete-record        |
 | Post deleted           | .../ghost/delete-record        |
 
-Finally, here are the currently configured Algolia indices for each publication:
+Finally, here are the currently configured Algolia indices for each publication, which are all production unless otherwise noted:
 
 | Publication URL                               | CMS      | Algolia index |
 | --------------------------------------------- | -------- | ------------- |
 | https://www.freecodecamp.org/news/            | Hashnode | news          |
-| https://chinese.freecodecamp.org/news/        | Ghost    | news-zh       |
+| http://localhost:3030                         | Ghost    | news-es (dev) |
+| https://www.freecodecamp.org/chinese/news/    | Ghost    | news-zh       |
 | https://www.freecodecamp.org/espanol/news/    | Ghost    | news-es       |
 | https://www.freecodecamp.org/italian/news/    | Ghost    | news-it       |
 | https://www.freecodecamp.org/japanese/news/   | Ghost    | news-ja       |
