@@ -13,6 +13,6 @@ jspm_packages
 
 # DO Functions specific
 .deployed
-__deployer__.zip
+__deployer__*
 do-functions/packages/**/**/helpers.js
 do-functions/packages/**/**/package*.json
