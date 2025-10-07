@@ -21,7 +21,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "algoliasearch": "5.39.0"
+    "algoliasearch": "5.40.0"
   },
   "devDependencies": {
     "@babel/core": "7.28.4",
