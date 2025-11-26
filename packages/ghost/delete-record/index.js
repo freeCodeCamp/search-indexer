@@ -18,15 +18,15 @@ export const deleteRecord = async (req) => {
 
     // Whether a published post is unpublished or deleted, the
     // status will be 'published' in the previous state
-    if (prevState.status === 'published') {
+    if (prevState?.status === 'published') {
       // Deleted posts don't include a url or a primary author object.
       // But since every post returns an author array, we can use
       // the first author object to determine the search index name.
       // This helps since we're handling data from localhost,
       // chinese.freecodecamp.org, and www.freecodecamp.org.
-      const primaryAuthorURL = prevState.authors
-        ? prevState.authors[0].url
-        : currState.authors[0].url;
+      const primaryAuthorURL = prevState?.authors
+        ? prevState?.authors[0]?.url
+        : currState?.authors[0]?.url;
       const siteURL = getBaseSiteURL(primaryAuthorURL);
       const indexName = getSearchIndexName(siteURL);
 
