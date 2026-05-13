@@ -42,7 +42,7 @@ Finally, here are the currently configured Algolia indices for each publication,
 
 ## How to Prepare Your Local Machine
 
-1. Clone this repo and run `npm ci` from the root directory to install the necessary packages.
+1. Clone this repo and run `pnpm install` from the root directory to install the necessary packages.
 1. Go to 1Password, search for the shared `[.env.*] [dev] [prd] Search Indexer` note.
 1. Within the `do-functions-directory` create two new files named `.env.dev` and `.env.prd`, and set `ALGOLIA_APP_ID` and `ALGOLIA_ADMIN_KEY` to the Algolia application ID and admin key for each respective stage using the values from the 1Password note above.
 1. If this is your first time using doctl, create a new `fcc-dev` context with `doctl auth init --context fcc-dev` (the context can be named anything, but `fcc-dev` will be used in the examples below).
@@ -62,8 +62,8 @@ Finally, here are the currently configured Algolia indices for each publication,
 
 ## How to Deploy Changes
 
-1. To deploy changes to the `dev-search-indexer` namespace, run `npm run do-deploy-dev` from the root directory.
-1. Once you're satisfied with the changes, deploy the changes to the production namespace with `npm run do-deploy-prd` from the root directory.
+1. To deploy changes to the `dev-search-indexer` namespace, run `pnpm run do-deploy-dev` from the root directory.
+1. Once you're satisfied with the changes, deploy the changes to the production namespace with `pnpm run do-deploy-prd` from the root directory.
 
 ## How to Destroy Functions or Namespaces
 

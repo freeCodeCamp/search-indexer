@@ -5,29 +5,28 @@
   "main": "handler.js",
   "type": "module",
   "engines": {
-    "node": ">=22",
-    "npm": ">=10"
+    "node": ">=24",
+    "pnpm": ">=10"
   },
   "scripts": {
-    "predo-deploy": "doctl serverless connect prd-search-indexer",
-    "do-deploy": "doctl serverless deploy '../search-indexer' --env '.env.prd'",
-    "predo-deploy-dev": "doctl serverless connect dev-search-indexer",
-    "do-deploy-dev": "doctl serverless deploy '../search-indexer' --env '.env.dev'",
+    "predo-deploy": "dotenv -e .env.prd -- sh -c 'doctl serverless connect prd-search-indexer --access-key $ACCESS_KEY_ID:$ACCESS_KEY_SECRET'",
+    "do-deploy": "dotenv -e .env.prd -- doctl serverless deploy '../search-indexer'",
+    "predo-deploy-dev": "dotenv -e .env.dev -- sh -c 'doctl serverless connect dev-search-indexer --access-key $ACCESS_KEY_ID:$ACCESS_KEY_SECRET'",
+    "do-deploy-dev": "dotenv -e .env.dev -- doctl serverless deploy '../search-indexer'",
     "do-list-namespaces": "doctl serverless namespaces list",
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --cache",
-    "lint:pretty": "prettier --ignore-path .gitignore --check .",
+    "lint:pretty": "prettier --check .",
     "prepare": "husky"
   },
   "dependencies": {
     "algoliasearch": "5.52.1"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/eslint-parser": "7.28.6",
-    "@eslint/js": "9.39.4",
-    "eslint": "9.39.4",
+    "@eslint/js": "10.0.1",
+    "dotenv-cli": "11.0.0",
+    "eslint": "10.3.0",
     "eslint-config-prettier": "10.1.8",
     "globals": "17.6.0",
     "husky": "9.1.7",

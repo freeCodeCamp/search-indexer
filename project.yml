@@ -7,18 +7,18 @@ packages:
     functions:
       - name: add-or-update-record
         main: 'addOrUpdateRecord'
-        runtime: nodejs:18
+        runtime: nodejs:24
 
       - name: delete-record
         main: 'deleteRecord'
-        runtime: nodejs:18
+        runtime: nodejs:24
 
   - name: hashnode
     functions:
       - name: add-or-update-record
         main: 'addOrUpdateRecord'
-        runtime: nodejs:18
+        runtime: nodejs:24
 
       - name: delete-record
         main: 'deleteRecord'
-        runtime: nodejs:18
+        runtime: nodejs:24

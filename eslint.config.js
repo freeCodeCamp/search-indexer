@@ -8,7 +8,10 @@ export default [
   {
     files: ['**/*.js'],
     ignores: ['**/node_modules/**'],
-    languageOptions: { sourceType: 'module', globals: { ...globals.node } },
+    languageOptions: {
+      sourceType: 'module',
+      globals: { ...globals.node }
+    },
     rules: {
       'max-len': [
         'error',
