@@ -6,7 +6,7 @@
   "type": "module",
   "engines": {
     "node": ">=24",
-    "npm": ">=10"
+    "pnpm": ">=10"
   },
   "scripts": {
     "predo-deploy": "doctl serverless connect prd-search-indexer",
@@ -17,7 +17,7 @@
     "format": "prettier --ignore-path .gitignore --write .",
     "lint": "npm-run-all lint:*",
     "lint:code": "eslint . --cache",
-    "lint:pretty": "prettier --ignore-path .gitignore --check .",
+    "lint:pretty": "prettier --check .",
     "prepare": "husky"
   },
   "dependencies": {
