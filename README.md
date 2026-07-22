@@ -63,7 +63,7 @@ Finally, here are the currently configured Algolia indices for each publication,
 ## How to Deploy Changes
 
 1. To deploy changes to the `dev-search-indexer` namespace, run `pnpm run do-deploy-dev` from the root directory.
-1. Once you're satisfied with the changes, deploy the changes to the production namespace with `pnpm run do-deploy-prd` from the root directory.
+1. Once you're satisfied with the changes, deploy the changes to the production namespace with `pnpm run do-deploy` from the root directory.
 
 ## How to Destroy Functions or Namespaces
 
