@@ -1,6 +1,6 @@
 {
   "labels": ["renovate"],
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "branchConcurrentLimit": 20,
   "packageRules": [
     {
