@@ -28,7 +28,7 @@
     "dotenv-cli": "11.0.0",
     "eslint": "10.8.1",
     "eslint-config-prettier": "10.1.8",
-    "globals": "17.9.0",
+    "globals": "17.10.0",
     "husky": "9.1.7",
     "lint-staged": "17.3.0",
     "npm-run-all2": "8.0.4",
